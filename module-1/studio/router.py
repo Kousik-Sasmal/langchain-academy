@@ -1,4 +1,4 @@
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 from langgraph.graph import MessagesState
 from langgraph.graph import StateGraph, START, END
 from langgraph.prebuilt import ToolNode, tools_condition
@@ -14,7 +14,8 @@ def multiply(a: int, b: int) -> int:
     return a * b
 
 # LLM with bound tool
-llm = ChatOpenAI(model="gpt-4o")
+CHAT_MODEL_NAME = "llama-3.1-70b-versatile"
+llm = ChatGroq(model=CHAT_MODEL_NAME)
 llm_with_tools = llm.bind_tools([multiply])
 
 # Node
